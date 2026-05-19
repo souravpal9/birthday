@@ -10,7 +10,7 @@ scroll-behavior:smooth;
 touch-action:manipulation;
 }
 
-body{
+body{#hold
 background:#08080d;
 color:white;
 overflow:hidden;
@@ -153,6 +153,16 @@ min-height:clamp(300px, 50vh, 500px);
 #holdArea{
 
 display:none;
+
+}
+
+#hold{
+
+touch-action:none;
+
+-webkit-touch-callout:none;
+
+user-select:none;
 
 }
 
