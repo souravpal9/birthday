@@ -64,7 +64,9 @@ window.toggleMusic = function() {
 function initAudio() {
   if (musicInitialized) return;
   song.volume = 0;
-  song.play().then(() => {
+ song.load()
+
+song.play().then(() => {
     musicInitialized = true;
     document.getElementById("musicToggle").style.display = "inline-flex";
     document.getElementById("audioPrompt").style.display = "none";
@@ -141,8 +143,20 @@ status.innerHTML=
 
 function startExperience(){
 
+song.load()
+
 song.play()
-.catch(()=>{})
+.then(()=>{
+
+fadeVolume(
+0.20,
+3000
+)
+
+})
+.catch(
+e=>console.log(e)
+)
 
 document
 .querySelector(
@@ -150,11 +164,6 @@ document
 )
 .style.opacity=
 ".95"
-
-fadeVolume(
-0.20,
-3000
-)
 
 letter.classList.remove(
 "hidden"
