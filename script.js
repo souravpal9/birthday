@@ -61,25 +61,48 @@ window.toggleMusic = function() {
   }
 }
 
-function initAudio() {
-  if (musicInitialized) return;
-  song.volume = 0;
+function initAudio(){
 
-song.play().then(() => {
-    musicInitialized = true;
-    document.getElementById("musicToggle").style.display = "inline-flex";
-    document.getElementById("audioPrompt").style.display = "none";
-    fadeVolume(0.04, 3000);
-  }).catch(() => {
-    document.getElementById("audioPrompt").style.display = "block";
-    const resumeAudio = () => {
-      document.removeEventListener('click', resumeAudio);
-      document.removeEventListener('touchstart', resumeAudio);
-      initAudio();
-    };
-    document.addEventListener('click', resumeAudio);
-    document.addEventListener('touchstart', resumeAudio);
-  });
+if(
+musicInitialized
+)
+return
+
+song.volume=
+0
+
+song.muted=
+false
+
+const start=()=>{
+
+song.play()
+.then(()=>{
+
+musicInitialized=
+true
+
+fadeVolume(
+0.04,
+3000
+)
+
+document
+.getElementById(
+"musicToggle"
+)
+.style.display=
+"inline-flex"
+
+})
+.catch(
+console.log
+)
+
+}
+
+start()
+
 }
 
 function butterflyBoost() {
@@ -123,7 +146,6 @@ verify.classList.add(
 main.classList.remove(
 "hidden"
 )
-initAudio()
 document.body.style.overflow=
 "auto"
 
@@ -142,14 +164,7 @@ status.innerHTML=
 
 function startExperience(){
 
-if(
-song.paused
-){
-
-song.play()
-.catch(()=>{})
-
-}
+initAudio()
 
 fadeVolume(
 0.20,
@@ -163,19 +178,26 @@ document
 .style.opacity=
 ".95"
 
-letter.classList.remove(
+letter
+.classList
+.remove(
 "hidden"
 )
 
-continueBtn.style.display=
+continueBtn
+.style
+.display=
 "none"
 
-continueBtn.style.visibility=
+continueBtn
+.style
+.visibility=
 "hidden"
 
 type()
 
-letter.scrollIntoView({
+letter
+.scrollIntoView({
 
 behavior:
 "smooth"
