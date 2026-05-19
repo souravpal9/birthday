@@ -500,6 +500,28 @@ hold.onmouseup = hold.onmouseleave = () => {
   }
 }
 
+hold.addEventListener(
+"touchstart",
+()=>{
+
+hold.onmousedown()
+
+},
+{
+passive:true
+}
+)
+
+hold.addEventListener(
+"touchend",
+()=>{
+
+hold.onmouseup()
+
+}
+)
+
+
 hold.ontouchstart = (e)=>{
 
 e.preventDefault()
