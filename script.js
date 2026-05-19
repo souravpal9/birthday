@@ -477,76 +477,21 @@ warn.onclick = () => {
 let p = 0
 let holdInterval = null
 
-hold.onmousedown = () => {
-  clearInterval(holdInterval)
-  holdInterval = setInterval(() => {
-    p += 2
-    bar.style.width = p + "%"
-    if (p >= 100) {
-      clearInterval(holdInterval)
-      const scratchSection = document.getElementById("scratch")
-      scratchSection.classList.remove("hidden")
-      scratchSection.scrollIntoView({ behavior: "smooth" })
-      initScratch()
-    }
-  }, 100)
-}
+hold.onpointerdown = () => {
 
-hold.onmouseup = hold.onmouseleave = () => {
-  clearInterval(holdInterval)
-  if (p < 100) {
-    p = 0
-    bar.style.width = "0%"
-  }
-}
+clearInterval(holdInterval)
 
-hold.addEventListener(
-"touchstart",
-()=>{
+holdInterval = setInterval(() => {
 
-hold.onmousedown()
+p += 2
 
-},
-{
-passive:true
-}
-)
+bar.style.width = p + "%"
 
-hold.addEventListener(
-"touchend",
-()=>{
+if (p >= 100) {
 
-hold.onmouseup()
+clearInterval(holdInterval)
 
-}
-)
-
-
-hold.ontouchstart = (e)=>{
-
-e.preventDefault()
-
-clearInterval(
-holdInterval
-)
-
-holdInterval=
-setInterval(()=>{
-
-p+=2
-
-bar.style.width=
-p+"%"
-
-if(
-p>=100
-){
-
-clearInterval(
-holdInterval
-)
-
-const scratchSection=
+const scratchSection =
 document.getElementById(
 "scratch"
 )
@@ -573,8 +518,9 @@ initScratch()
 
 }
 
-hold.ontouchend=
-hold.ontouchcancel=
+hold.onpointerup =
+hold.onpointerleave =
+hold.onpointercancel =
 ()=>{
 
 clearInterval(
@@ -593,7 +539,6 @@ bar.style.width=
 }
 
 }
-
 
 let isScratching = false;
 let scratchCompleted = false;
