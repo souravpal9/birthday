@@ -64,7 +64,6 @@ window.toggleMusic = function() {
 function initAudio() {
   if (musicInitialized) return;
   song.volume = 0;
- song.load()
 
 song.play().then(() => {
     musicInitialized = true;
@@ -143,19 +142,18 @@ status.innerHTML=
 
 function startExperience(){
 
-song.load()
+if(
+song.paused
+){
 
 song.play()
-.then(()=>{
+.catch(()=>{})
+
+}
 
 fadeVolume(
 0.20,
 3000
-)
-
-})
-.catch(
-e=>console.log(e)
 )
 
 document
