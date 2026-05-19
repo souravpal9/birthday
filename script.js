@@ -99,7 +99,6 @@ verify.classList.remove(
 "hidden"
 )
 
-initAudio()
 
 }
 
@@ -123,11 +122,13 @@ verify.classList.add(
 main.classList.remove(
 "hidden"
 )
-
+initAudio()
 document.body.style.overflow=
 "auto"
 
 fadeVolume(0.12, 3000)
+
+  
 
 }else{
 
@@ -139,20 +140,31 @@ status.innerHTML=
 }
 
 function startExperience(){
+
+song.play()
+.catch(()=>{})
+
 document
 .querySelector(
 ".hero"
 )
 .style.opacity=
 ".95"
-fadeVolume(0.20, 3000)
+
+fadeVolume(
+0.20,
+3000
+)
 
 letter.classList.remove(
 "hidden"
 )
 
-continueBtn.style.display = "none"
-continueBtn.style.visibility = "hidden"
+continueBtn.style.display=
+"none"
+
+continueBtn.style.visibility=
+"hidden"
 
 type()
 
