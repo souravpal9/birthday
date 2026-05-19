@@ -594,3 +594,9 @@ background-repeat:
 no-repeat;
 
 }
+
+#hold{
+
+touch-action:none;
+
+}
