@@ -120,11 +120,22 @@ color:white;
 
             </div>
 
-            <audio id="song" loop>
+            <audio
+id="song"
 
-                <source src="assets/song.mpeg">
+loop
 
-            </audio>
+preload="auto"
+
+playsinline
+
+crossorigin="anonymous">
+
+<source
+src="assets/song.mpeg"
+type="audio/mpeg">
+
+</audio>
 
             <button onclick="startExperience()">
 
