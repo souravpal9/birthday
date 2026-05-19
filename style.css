@@ -1,0 +1,594 @@
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Inter;
+}
+
+html{
+scroll-behavior:smooth;
+touch-action:manipulation;
+}
+
+body{
+background:#08080d;
+color:white;
+overflow:hidden;
+min-width:0;
+}
+
+.hidden{
+display:none !important;
+}
+
+.screen{
+
+height:100vh;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+padding:20px;
+
+}
+
+.card,
+.glass{
+
+width:min(900px,95%);
+
+padding:clamp(20px, 5vw, 50px);
+
+border-radius:clamp(20px, 4vw, 40px);
+
+background:
+rgba(255,255,255,.04);
+
+text-align:center;
+
+margin:0 auto;
+
+animation: slideUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+
+}
+
+@keyframes slideUp {
+  0% { opacity: 0; transform: translateY(30px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+section{
+
+min-height:100vh;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+flex-direction:column;
+
+width: 100%;
+
+}
+
+.hero h2{
+
+font-size:clamp(60px, 15vw, 120px);
+
+font-family:
+Playfair Display;
+
+}
+
+button{
+
+padding:18px 30px;
+
+border:none;
+
+border-radius:999px;
+
+margin:20px auto 0;
+
+cursor:pointer;
+
+display:inline-flex;
+
+justify-content:center;
+
+align-items:center;
+
+max-width:100%;
+
+min-height:60px;
+
+vertical-align:middle;
+
+transition: transform 0.2s ease, background 0.2s ease;
+
+}
+
+button:hover {
+  transform: scale(1.05);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+button:active {
+  transform: scale(0.95);
+}
+
+input{
+
+padding:18px;
+
+width:min(100%,300px);
+
+margin:20px auto 0;
+
+border-radius:20px;
+
+min-height:60px;
+
+vertical-align:middle;
+
+}
+
+#typed{
+
+line-height:2;
+
+white-space:pre-wrap;
+
+min-height:clamp(300px, 50vh, 500px);
+
+}
+
+
+
+#holdArea{
+
+display:none;
+
+}
+
+#bar{
+
+height:8px;
+
+background:pink;
+
+width:0;
+
+margin-top:20px;
+
+}
+
+.slider{
+
+overflow:hidden;
+
+}
+
+.track{
+
+display:flex;
+
+transition:
+transform .7s ease;
+
+width:100%;
+
+align-items:center;
+
+}
+
+.track>*{
+
+min-width:100%;
+
+flex-shrink:0;
+
+}
+
+.track img{
+
+width:100%;
+
+height:min(78vh,820px);
+
+object-fit:contain;
+
+object-position:center;
+
+background:#09090d;
+
+display:block;
+
+border-radius:30px;
+
+}
+
+#butterfly{
+
+position:fixed;
+
+left:100px;
+
+top:100px;
+
+font-size:36px;
+
+z-index:999;
+
+animation:
+wing .4s infinite;
+
+}
+
+@keyframes wing{
+
+50%{
+
+transform:
+scaleY(.8);
+
+}
+
+}
+
+.wing-anim{
+display:inline-block;
+animation: wing .4s infinite ease-in-out;
+transform-origin:center;
+}
+
+.flowers div{
+
+position:fixed;
+
+opacity:.15;
+
+font-size:32px;
+
+}
+
+.flowers div:nth-child(1){
+
+left:15vw;
+top:10vh;
+
+}
+
+.flowers div:nth-child(2){
+
+right:15vw;
+top:10vh;
+
+}
+
+.flowers div:nth-child(3){
+
+left:15vw;
+bottom:10vh;
+
+}
+
+.flowers div:nth-child(4){
+
+right:15vw;
+bottom:10vh;
+
+}
+
+#puzzle{
+
+display:grid;
+
+grid-template-columns:
+repeat(4,1fr);
+
+gap:10px;
+
+}
+
+.piece{
+
+aspect-ratio:1;
+
+background-image:
+url(
+assets/youtube_profile_under4mb.jpg
+);
+
+background-size:
+400% 300%;
+
+cursor:grab;
+
+user-select:none;
+
+transition:filter .2s ease, box-shadow .2s ease;
+
+border:2px solid rgba(255,255,255,.1);
+
+}
+
+.piece:hover{
+
+filter:brightness(1.1);
+
+box-shadow:0 0 15px rgba(255,255,255,.2);
+
+}
+
+.piece:active{
+
+cursor:grabbing;
+
+}
+
+.piece[draggable="true"]{
+
+-webkit-user-drag:element;
+
+}
+
+#final{
+
+display:none;
+
+position:fixed;
+
+inset:0;
+
+width:100vw;
+
+height:100vh;
+
+background:rgba(0,0,0,.98);
+
+overflow:hidden;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+flex-direction:column;
+
+padding:30px;
+
+}
+
+.fly{
+
+position:absolute;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+bottom:-50px;
+
+font-size:30px;
+
+animation:
+up linear forwards;
+
+animation-timing-function:ease-in;
+
+}
+
+@keyframes up{
+
+to{
+
+transform:
+translateY(-120vh);
+
+opacity:0;
+
+}
+
+}
+
+@media (max-width: 900px) {
+  .card,
+  .glass {
+    width: min(95%, 100%);
+    padding: 35px;
+    border-radius: 30px;
+  }
+
+  .hero h2 {
+    font-size: clamp(4rem, 10vw, 6rem);
+  }
+
+  #typed {
+    min-height: 320px;
+  }
+
+  .track img {
+    max-height: 420px;
+  }
+
+  #puzzle {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  #butterfly {
+    left: 5vw;
+    top: 5vh;
+    font-size: 28px;
+  }
+
+  .flowers div {
+    font-size: 24px;
+  }
+
+  .nav {
+    gap: 16px;
+  }
+}
+
+@media (max-width: 600px) {
+  body {
+    min-width: 0;
+  }
+
+  .card,
+  .glass {
+    padding: 24px;
+    border-radius: 24px;
+  }
+
+  .hero {
+    padding: 30px 20px;
+  }
+
+  .hero h2 {
+    font-size: clamp(3rem, 16vw, 4.5rem);
+  }
+
+  button,
+  input {
+    width: 100%;
+  }
+
+  #typed {
+    min-height: 240px;
+  }
+
+  .track img {
+    max-height: 280px;
+  }
+
+  #puzzle {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+
+  .nav {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .nav button {
+    flex: 1;
+    min-width: 140px;
+  }
+
+  #final .credits {
+    font-size: 0.95rem;
+    line-height: 2;
+  }
+}
+
+.credits{
+
+position:absolute;
+
+bottom:-100vh;
+
+width:100%;
+
+text-align:center;
+
+line-height:2.5;
+
+animation:
+credits 35s linear forwards;
+
+}
+
+@keyframes credits{
+
+to{
+
+transform:
+translateY(-250vh);
+
+}
+
+}
+
+.card{
+
+animation:
+enter 1.4s ease;
+
+}
+
+@keyframes enter{
+
+0%{
+
+opacity:0;
+
+transform:
+translateY(60px)
+scale(.94);
+
+}
+
+100%{
+
+opacity:1;
+
+transform:none;
+
+}
+
+}
+
+.hero h2{
+
+animation:
+hero 2s;
+
+}
+
+@keyframes hero{
+
+0%{
+
+opacity:0;
+
+transform:
+scale(.8);
+
+}
+
+100%{
+
+opacity:1;
+
+}
+
+}
+
+#puzzleContainer{
+
+overflow:hidden;
+
+}
+
+.piece{
+
+background-size:
+
+400% 300%;
+
+background-repeat:
+
+no-repeat;
+
+}

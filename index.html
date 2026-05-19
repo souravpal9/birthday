@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>a birthday gift i could actually give</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@700&display=swap"
+        rel="stylesheet">
+
+</head>
+
+<body>
+
+    <button id="musicToggle" class="glass" onclick="toggleMusic()"
+style="
+position:fixed;
+top:26px;
+left:50%;
+transform:translateX(-50%);
+z-index:10001;
+padding:10px 15px;
+margin:0;
+min-height:unset;
+border-radius:20px;
+font-size:20px;
+display:none;
+border:none;
+color:white;
+">
+♫
+</button>
+    <div id="audioPrompt"
+        style="position:fixed; bottom:20px; left:50%; transform:translateX(-50%); background:rgba(0,0,0,0.7); padding:10px 20px; border-radius:20px; z-index:10001; display:none; font-size:14px; pointer-events:none; border:1px solid rgba(255,255,255,0.1);">
+        tap anywhere for sound</div>
+
+    <div class="flowers">
+        <div>🌸</div>
+        <div>🌷</div>
+        <div>🌷</div>
+        <div>🌸</div>
+    </div>
+
+    <div id="butterfly">🦋</div>
+
+    <div id="gate" class="screen">
+
+        <div class="card">
+
+            <div class="tag">
+                FOR ONE PERSON
+            </div>
+
+            <h1>
+
+                this page
+                wasn't supposed
+                to open
+
+            </h1>
+
+            <div class="sub">
+
+                only one person
+                should continue
+
+            </div>
+
+            <button onclick="go()">
+
+                continue →
+
+            </button>
+
+        </div>
+
+    </div>
+
+    <div id="verify" class="screen hidden">
+
+        <div class="card">
+
+            <h1>
+
+                prove it
+
+            </h1>
+
+            <input id="nameInput" placeholder="type your name">
+
+            <button onclick="unlock()">
+
+                enter
+
+            </button>
+
+            <div id="status"></div>
+
+        </div>
+
+    </div>
+
+    <div id="main" class="hidden">
+
+        <section class="hero">
+
+            <h2>
+
+                nanya
+
+            </h2>
+
+            <div>
+
+                happy birthday • 21 ✨
+
+            </div>
+
+            <audio id="song" loop>
+
+                <source src="assets/song.mpeg">
+
+            </audio>
+
+            <button onclick="startExperience()">
+
+                start experience →
+
+            </button>
+
+        </section>
+
+        <section id="letter" class="hidden">
+
+            <div class="glass">
+
+                <div id="typed">
+
+                </div>
+
+                <button id="continueBtn" type="button">
+
+                    continue →
+
+                </button>
+
+            </div>
+
+        </section>
+
+        <section id="game" class="hidden">
+
+            <div class="glass" id="gameGlass"
+                style="position: relative; overflow: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 350px;">
+
+                <h2 id="gameTitle" style="transition: opacity 0.5s ease;">
+                    do not click
+                </h2>
+
+                <button id="warn"
+                    style="transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 1s ease; position: relative;">
+                    don't click
+                </button>
+
+                <div id="surrenderText"
+                    style="display: none; position: absolute; text-align: center; font-size: 1.2rem; line-height: 1.8; opacity: 0; transition: opacity 0.5s ease; padding: 20px;">
+                </div>
+
+                <div id="holdArea" style="display: none; width: 100%; flex-direction: column; align-items: center;">
+                    <button id="hold">
+                        hold 5 sec
+                    </button>
+                    <div style="font-size: 0.85rem; opacity: 0.7; margin-top: 15px; text-align: center;">(although i
+                        still think you clicked too fast.)</div>
+                    <div id="bar"></div>
+                </div>
+
+            </div>
+
+        </section>
+
+        <section id="scratch" class="hidden">
+            <div class="glass">
+                <h2>before photos →</h2>
+                <div id="scratchContainer"style="position:relative;margin:20px auto;overflow:hidden;border-radius:20px;width:100%;max-width:700px;min-height:420px;">
+                    <img src="assets/photo1.jpeg"
+style="
+width:100%;
+height:100%;
+display:block;
+object-fit:contain;
+object-position:center;
+background:#09090d;
+border-radius:20px;
+pointer-events:none;
+"/>
+                    <canvas id="scratchCanvas"
+                        style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 20px; touch-action: none; transition: opacity 0.5s ease;"></canvas>
+                </div>
+                <div id="scratchResult" style="display: none; flex-direction: column; align-items: center; gap: 15px;">
+                    <div>first memory unlocked ✨</div>
+                    <button onclick="showPhotos()">continue →</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="photos" class="hidden">
+            <div class="glass" style="position:relative; display:flex; flex-direction:column; align-items:center;">
+                <h2 id="photoCounter">1 / 10</h2>
+                <div class="slider" id="gallerySlider" style="width:100%; touch-action: pan-y;">
+                    <div class="track" id="track">
+                        <img src="assets/photo2.jpeg">
+                        <img src="assets/photo3.jpeg">
+                        <img src="assets/photo4.jpeg">
+                        <img src="assets/photo5.jpeg">
+                        <img src="assets/photo6.jpeg">
+                        <img src="assets/photo7.jpeg">
+                        <img src="assets/photo8.jpeg">
+                        <img src="assets/photo9.jpeg">
+                        <img src="assets/photo10.jpeg">
+                        <img src="assets/photo11.jpeg">
+                    </div>
+                </div>
+                <div class="nav" style="margin-top: 15px;">
+                    <button onclick="prevSlide()">←</button>
+                    <button onclick="nextSlide()">→</button>
+                </div>
+                <button onclick="choosePhoto()" style="margin-top:20px; padding:15px 30px;">choose this →</button>
+            </div>
+        </section>
+
+        <section id="puzzleScreen" class="hidden">
+            <div class="glass" style="display:flex; flex-direction:column; align-items:center;">
+                <h2>fix the memory</h2>
+                <div id="puzzleContainer"
+                    style="position:relative; width:100%; max-width:700px; aspect-ratio: 4/3; margin-top:20px;">
+                    <div id="puzzle"
+                        style="display:grid; grid-template-columns: repeat(4, 1fr); grid-template-rows: repeat(3, 1fr); gap:2px; width:100%; height:100%;">
+                    </div>
+                    <div id="puzzleFlash"
+                        style="position:absolute; inset:0; background:white; opacity:0; pointer-events:none; transition:opacity 0.3s;">
+                    </div>
+                </div>
+                <div id="puzzleMsg"
+                    style="display:none; text-align:center; font-size:1.1rem; line-height:1.6; margin-top:20px; opacity:0; transition:opacity 1s ease;">
+                    okay.<br><br>i wasn't expecting this.<br><br>but somehow<br>you still finished it.
+                </div>
+                <button id="finishBtn" type="button" onclick="finish()"
+                    style="display:none; margin-top:15px; opacity:0; transition:opacity 1s ease;">
+                    one last thing →
+                </button>
+            </div>
+        </section>
+
+    </div>
+
+    <div id="final" class="hidden">
+
+        <div id="bf"></div>
+
+        <div class="credits">
+
+            20 may 2005
+
+            <br><br>
+
+            welcome to 21 ✨
+
+            <br><br><br>
+
+            21 years.
+
+            still becoming.
+
+            <br><br>
+
+            i thought of earrings.
+
+            then a letter.
+
+            then this.
+
+            <br><br>
+
+            i wanted to give you something.
+
+            then i realised—
+
+            sometimes the difficult part
+            isn’t choosing a gift.
+
+            it’s figuring out
+            how to give it.
+
+            <br><br>
+
+            so i made this instead.
+
+            something you don’t have to carry.
+
+            something you don’t have to hide.
+
+            something that can just exist.
+
+            <br><br><br>
+
+            and there’s one more thing
+            i wanted to say.
+
+            <br><br>
+
+            thank you.
+
+            <br><br>
+
+            not in the dramatic way.
+
+            not because birthdays
+            make people emotional.
+
+            just genuinely—
+
+            thank you for existing
+            in my life.
+
+            <br><br>
+
+            for the random conversations.
+
+            for the moments
+            that probably meant nothing to you
+            but stayed with me.
+
+            for unknowingly becoming part
+            of memories
+            i’ll remember for a long time.
+
+            <br><br>
+
+            i don’t think people always realise
+            the effect they have on others.
+
+            sometimes they just show up,
+
+            be themselves,
+
+            and quietly leave things
+            a little better than before.
+
+            <br><br>
+
+            you did that.
+
+            <br><br>
+
+            and maybe life changes.
+
+            people get busy.
+
+            paths become different.
+
+            things become memories.
+
+            <br><br>
+
+            but even then—
+
+            i’m grateful
+            that our timelines crossed at all.
+
+            <br><br>
+
+            thank you
+            for being part of my story.
+
+            and thank you
+            for giving me memories
+            that made making this
+            feel worth it.
+
+            <br><br><br>
+
+            this page will end.
+
+            the butterflies will disappear.
+
+            the music will stop.
+
+            but i hope your year starts
+            beautifully.
+
+            <br><br>
+
+            happy birthday again.
+
+            <br>
+
+            welcome to 21.
+
+            <br><br><br>
+
+            — thank you for staying —
+
+            <br><br>
+
+            fin.
+
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
